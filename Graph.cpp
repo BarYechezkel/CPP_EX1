@@ -12,6 +12,8 @@ void Graph::loadGraph( std::vector<std::vector<int>> &adjacency_matrix)
 {
     this->isDirected = false;
     this->numOfEdges = 0;
+    this->withWeights = false;
+    this->hasNegativeEdge = false;
 
     if (adjacency_matrix.size() == 0)
     {
@@ -49,9 +51,9 @@ void Graph::loadGraph( std::vector<std::vector<int>> &adjacency_matrix)
                 hasNegativeEdge = true;
             }
 
-            if (adjacency_matrix[i][j] > 1){
+            if (adjacency_matrix[i][j] != 1 && adjacency_matrix[i][j] != 0){
                 // If the matrix has a non-zero element greater than 1, the graph has a weighted edge
-                withoutWhights = false;
+                withWeights = true;
             }
         }
     }
@@ -104,9 +106,9 @@ bool Graph::getHasNegativeEdge()
 }
 
 // Method to get if the graph has a weighted edge
-bool Graph::getWithoutWhights()
+bool Graph::getWithWeights()
 {
-    return withoutWhights;
+    return withWeights;
 }
 
 

@@ -11,7 +11,7 @@ private:
     std::vector<std::vector<int>> matrix;
     bool isDirected;
     bool hasNegativeEdge;
-    bool withoutWhights = true;
+    bool withWeights;
     int numOfEdges;
 public:
     // constructor
@@ -23,7 +23,7 @@ public:
     bool getIsDirected();
     int getNumOfEdges();
     bool getHasNegativeEdge();
-    bool getWithoutWhights();
+    bool getWithWeights();
     
 };
 }

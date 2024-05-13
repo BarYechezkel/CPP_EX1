@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     ariel::Graph g;
-    // 3x3 matrix that represents a connected graph.
+   // 3x3 matrix that represents a connected graph.
     vector<vector<int>> graph = {
         {0, 1, 0},
         {1, 0, 1},
@@ -150,7 +150,7 @@ int main()
     // 5x5 matrix that reprsents a connected weighted graph.
     vector<vector<int>> graph8 = {
         {0, 1, 0},
-        {0, 0, 1},
+        {0, 0, -1},
         {1, 0, 0}};
         
     g.loadGraph(graph8); // Load the graph to the object.
@@ -182,12 +182,11 @@ int main()
         {0, 1, 0},
         {0, 0, 1},
         {1, 0, 0}};
-        
     g.loadGraph(graph10); // Load the graph to the object.
 
     g.printGraph();                                    // Should print: "Graph with 5 vertices and 10 edges."
     cout << Algorithms::isConnected(g) << endl;        // Should print: "1" (true).
-    cout << Algorithms::shortestPath(g, 0, 1) << endl; // Should print: 0->2->3->4.
+    cout << Algorithms::shortestPath(g, 0, 2) << endl; // Should print: 0->2->3->4.
     cout << Algorithms::isContainsCycle(g) << endl;    // Should print: "0" (false).
     cout << Algorithms::isBipartite(g) << endl;        // Should print: "The graph is bipartite: A={0, 2, 4}, B={1, 3}."
 
