@@ -8,15 +8,15 @@ Graph::Graph()
 }
 
 // Method to load graph from adjacency matrix
-void Graph::loadGraph(const std::vector<std::vector<int>> &adjacency_matrix)
+void Graph::loadGraph( std::vector<std::vector<int>> &adjacency_matrix)
 {
     this->isDirected = false;
     this->numOfEdges = 0;
-    
+
     if (adjacency_matrix.size() == 0)
     {
         // If the matrix is empty, the graph is empty
-        return;
+        throw std::invalid_argument("The matrix is empty");
     }
 
     for (size_t i = 0; i < adjacency_matrix.size(); i++)
@@ -24,7 +24,7 @@ void Graph::loadGraph(const std::vector<std::vector<int>> &adjacency_matrix)
         if (adjacency_matrix.size() != adjacency_matrix[i].size())
         {
             // If the matrix is not square, it is not a valid adjacency matrix
-            return;
+            throw std::invalid_argument("The matrix is not square");
         }
 
         for (size_t j = 0; j < adjacency_matrix[i].size(); j++)
@@ -37,12 +37,21 @@ void Graph::loadGraph(const std::vector<std::vector<int>> &adjacency_matrix)
             if (adjacency_matrix[j][j] != 0)
             {
                 // If the diagonal is not zero, the matrix is not a valid adjacency matrix
-                return;
+                throw std::invalid_argument("The matrix is not a valid adjacency matrix");
             }
             if (adjacency_matrix[i][j] != 0)
             {
                 // If the matrix has a non-zero element, it is an edge
                 numOfEdges++;
+            }
+            if (adjacency_matrix[i][j] < 0){
+                // If the matrix has a negative element, the graph has a negative edge
+                hasNegativeEdge = true;
+            }
+
+            if (adjacency_matrix[i][j] > 1){
+                // If the matrix has a non-zero element greater than 1, the graph has a weighted edge
+                withoutWhights = false;
             }
         }
     }
@@ -58,20 +67,7 @@ void Graph::loadGraph(const std::vector<std::vector<int>> &adjacency_matrix)
 // Method to print the graph
 void Graph::printGraph()
 {
-    std::cout << "Graph with " << matrix.size() << " vertices and edges: " << numOfEdges << std::endl;
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        std::cout << "Vertex " << i << " connected to:";
-        for (size_t j = 0; j < matrix[i].size(); j++)
-        {
-            if (matrix[i][j] == 1)
-            {
-                std::cout << " " << j;
-            }
-        }
-        std::cout << std::endl;
-    }
-
+    std::cout << "Graph with " << matrix.size() << " vertices and "<< numOfEdges <<" edges." << std::endl;
     for (size_t i = 0; i < matrix.size(); i++)
     {
         for (size_t j = 0; j < matrix[i].size(); j++)
@@ -80,4 +76,40 @@ void Graph::printGraph()
         }
         std::cout << std::endl;
     }
+  
 }
+
+// Method to get the adjacency matrix
+std::vector<std::vector<int>> Graph::getMatrix()
+{
+    return matrix;
+}
+
+// Method to get if the graph is directed
+bool Graph::getIsDirected()
+{
+    return isDirected;
+}
+
+// Method to get the number of edges
+int Graph::getNumOfEdges()
+{
+    return numOfEdges;
+}
+
+// Method to get if the graph has a negative edge
+bool Graph::getHasNegativeEdge()
+{
+    return hasNegativeEdge;
+}
+
+// Method to get if the graph has a weighted edge
+bool Graph::getWithoutWhights()
+{
+    return withoutWhights;
+}
+
+
+
+
+
