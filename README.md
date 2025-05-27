@@ -2,7 +2,6 @@
 
 ## Author
 - [Bar Yechezkel](https://github.com/BarYechezkel)
-- Email: baryechezkel@gmail.com
 
 במטלה זו נמממש מספר אלגוריתמים באמצעות שפת
 c++
